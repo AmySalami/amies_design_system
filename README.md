@@ -1,5 +1,9 @@
 # Amie's Design System
 
+[![Open Storybook](https://img.shields.io/badge/Open-Storybook-ffc400?style=for-the-badge&labelColor=1e3258)](https://amysalami.github.io/amies_design_system/amies-design-system.html)
+
+เปิด live preview: https://amysalami.github.io/amies_design_system/amies-design-system.html
+
 ระบบดีไซน์กลาง (design tokens และ components ที่ใช้ซ้ำ) สำหรับทุกโปรเจกต์
 นี่คือ single source of truth แก้ token ที่นี่ที่เดียว
 
