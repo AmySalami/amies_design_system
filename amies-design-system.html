@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Amie's Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="amies-design-system.css" />
+<style>
+  /* tokens live in design-system.css (single source of truth) */
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:"Hanken Grotesk",-apple-system,sans-serif;
+    font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+
+  /* ---------------- DOC SHELL ---------------- */
+  .ds-shell{max-width:980px;margin:0 auto;padding:0 var(--gutter);}
+  .ds-hero{padding:72px 0 30px;border-bottom:1px solid var(--line);}
+  .ds-hero .eyebrow{margin-bottom:20px;}
+  .ds-hero h1{
+    font-family:"Fraunces",serif;font-weight:500;color:var(--secondary);
+    font-size:clamp(38px,6vw,60px);line-height:1.04;letter-spacing:-.02em;margin-bottom:16px;
+  }
+  .ds-hero p{max-width:560px;color:var(--ink-soft);font-size:19px;}
+
+  .ds-section{padding:54px 0;border-bottom:1px solid var(--line);}
+  .ds-section:last-child{border-bottom:none;}
+  .ds-section > h2{
+    font-family:"Fraunces",serif;font-weight:500;color:var(--secondary);
+    font-size:clamp(26px,3.6vw,34px);letter-spacing:-.02em;margin-bottom:6px;
+  }
+  .ds-section > .ds-lead{color:var(--ink-soft);font-size:16px;max-width:620px;margin-bottom:34px;}
+
+  .ds-block{margin-bottom:40px;}
+  .ds-block:last-child{margin-bottom:0;}
+  .ds-block h3{
+    font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--secondary);margin-bottom:18px;
+  }
+
+  /* a neutral stage to show a live component on */
+  .ds-stage{
+    background:linear-gradient(180deg,#FFFDF9,var(--paper-2));
+    border:1px solid var(--line);border-radius:var(--r-md);
+    padding:34px 30px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;
+  }
+  .ds-stage.col{flex-direction:column;align-items:stretch;}
+  .ds-note{font-size:13px;color:var(--ink-soft);margin-top:12px;}
+  .ds-note code,.mono{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;
+    background:rgba(42,38,34,.06);padding:1px 6px;border-radius:5px;color:var(--ink);
+  }
+
+  /* ---------------- COLOR ---------------- */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+  .swatch{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:#fff;}
+  .swatch .chip{height:84px;}
+  .swatch .meta{padding:13px 15px;}
+  .swatch .nm{font-weight:600;font-size:14px;color:var(--ink);}
+  .swatch .hex{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--ink-soft);margin-top:2px;}
+  .swatch .role{font-size:12.5px;color:var(--ink-soft);margin-top:8px;line-height:1.5;}
+  .swatch .var{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--secondary);margin-top:6px;}
+
+  /* ---------------- TYPE ---------------- */
+  .type-row{
+    display:grid;grid-template-columns:1fr 220px;gap:20px;align-items:baseline;
+    padding:18px 0;border-bottom:1px dashed var(--line);
+  }
+  .type-row:last-child{border-bottom:none;}
+  .type-spec{font-size:12.5px;color:var(--ink-soft);line-height:1.6;}
+  .type-spec b{color:var(--ink);font-weight:600;}
+  @media(max-width:640px){.type-row{grid-template-columns:1fr;gap:8px;}}
+
+  /* ---------------- SCALE TOKENS (radius / space / shadow) ---------------- */
+  .token-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;}
+  .token{border:1px solid var(--line);border-radius:var(--r-md);padding:16px;background:#fff;text-align:center;}
+  .token .demo-box{height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+  .token .rad{width:64px;height:64px;background:var(--accent-soft);border:1px solid var(--line);}
+  .token .nm{font-weight:600;font-size:13.5px;}
+  .token .val{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--ink-soft);margin-top:2px;}
+
+  .space-row{display:flex;align-items:center;gap:16px;padding:10px 0;}
+  .space-bar{background:var(--accent);height:14px;border-radius:3px;}
+  .space-row .lbl{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:var(--ink-soft);width:120px;flex-shrink:0;}
+
+  .shadow-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px;}
+  .shadow-card{background:var(--paper);border-radius:var(--r-md);height:90px;display:flex;align-items:center;justify-content:center;font-size:12.5px;color:var(--ink-soft);}
+
+  /* ================= REAL COMPONENT STYLES (lifted from the case study) ================= */
+  .eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--secondary);}
+  .section-label{font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--secondary);display:flex;align-items:center;gap:12px;}
+  .section-label .num{color:var(--ink);font-family:"Fraunces",serif;font-style:italic;font-weight:400;letter-spacing:0;text-transform:none;font-size:15px;}
+
+  .cta{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--accent);color:var(--secondary);font-weight:600;font-size:15px;
+    border-radius:var(--r-pill);padding:13px 28px;text-decoration:none;
+    transition:transform .2s,box-shadow .2s;box-shadow:var(--shadow-lift);
+  }
+  .cta:hover{transform:translateY(-2px);}
+  .back{display:inline-block;font-size:14px;font-weight:600;color:var(--ink);border:1px solid var(--ink);border-radius:var(--r-pill);padding:11px 26px;text-decoration:none;transition:all .2s;}
+  .back:hover{background:var(--ink);color:var(--paper);}
+
+  .badge{font-weight:600;letter-spacing:.03em;font-size:11px;background:var(--accent);color:var(--secondary);border-radius:var(--r-pill);padding:2px 10px;}
+  .badge.future{background:transparent;color:var(--ink-soft);border:1px solid var(--line);}
+
+  .tag{font-size:13px;font-weight:500;color:var(--ink-soft);border:1px solid var(--line);border-radius:var(--r-pill);padding:6px 15px;background:rgba(255,255,255,.5);}
+
+  .pomo-pill{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:var(--r-pill);padding:9px 18px;font-size:14px;font-weight:600;letter-spacing:.02em;box-shadow:var(--shadow-pill);}
+  .pomo-pill .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);animation:blink 1.6s ease-in-out infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
+
+  .paper-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:22px 24px;}
+
+  .glance{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;width:100%;}
+  .glance.cols-3{grid-template-columns:repeat(3,1fr);}
+  .glance .cell{background:var(--paper);padding:22px 22px;}
+  .glance .cell h4{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--secondary);margin-bottom:10px;}
+  .glance .cell p{margin:0;font-size:15px;color:var(--ink);}
+
+  .imgslot{width:100%;}
+  .imgslot .frame{
+    border:1.5px dashed var(--line);border-radius:var(--r-md);
+    background:linear-gradient(180deg,#FFFDF9,var(--paper-2));aspect-ratio:16/9;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+    color:var(--ink-soft);text-align:center;padding:24px;
+  }
+  .imgslot .frame .ico{font-size:22px;opacity:.6;}
+  .imgslot .frame .label{font-size:13.5px;font-weight:600;color:var(--ink);}
+  .imgslot .frame .hint{font-size:12.5px;}
+
+  .takeaways{display:flex;flex-direction:column;gap:22px;width:100%;}
+  .take{display:flex;gap:16px;align-items:flex-start;}
+  .take .star{color:var(--accent);font-size:18px;line-height:1.5;flex-shrink:0;}
+  .take h3{font-family:"Fraunces",serif;font-weight:600;font-size:21px;letter-spacing:-.01em;margin-bottom:8px;color:var(--ink);}
+  .take p{margin:0;color:var(--ink-soft);}
+
+  .pullquote{text-align:center;width:100%;}
+  .pullquote blockquote{font-family:"Fraunces",serif;font-style:italic;font-weight:400;font-size:clamp(22px,3vw,30px);line-height:1.3;letter-spacing:-.01em;color:var(--ink);}
+  .pullquote blockquote::before{content:"\201C";color:var(--accent);}
+  .pullquote blockquote::after{content:"\201D";color:var(--accent);}
+
+  mark{background:var(--highlight);color:var(--ink);padding:0 .15em;border-radius:var(--r-xs);}
+
+  /* roadmap node samples */
+  .nodes{display:flex;gap:40px;flex-wrap:wrap;}
+  .node-demo{text-align:center;}
+  .node{width:42px;height:42px;border-radius:50%;background:var(--line);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;}
+  .node.current{background:var(--paper);border:2px solid var(--accent);}
+  .node-demo .cap{font-size:12.5px;color:var(--ink-soft);}
+
+  body.ds-page{overflow-x:hidden;}
+  footer.ds-foot{padding:40px 0 70px;text-align:center;color:var(--ink-soft);font-size:13px;}
+</style>
+</head>
+<body class="ds-page">
+
+  <div class="ds-shell">
+
+    <!-- HERO -->
+    <header class="ds-hero">
+      <div class="eyebrow">Component Library</div>
+      <h1>Amie's Design System</h1>
+      <p>The shared tokens and components used across projects. Primary is reserved for fills and icons, secondary carries every heading, label, and piece of text on a primary surface.</p>
+    </header>
+
+    <!-- COLOR -->
+    <section class="ds-section">
+      <h2>Color</h2>
+      <p class="ds-lead">A warm paper base with two roles for the brand pair: amber for surfaces and icons, navy for type.</p>
+
+      <div class="ds-block">
+        <h3>Brand pair</h3>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="chip" style="background:var(--accent);"></div>
+            <div class="meta"><div class="nm">Primary</div><div class="hex">#FFC400</div><div class="var">--accent</div><div class="role">Fills and icons only: buttons, badges, dots, the star, the AI sparkle. Never body text.</div></div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background:var(--secondary);"></div>
+            <div class="meta"><div class="nm">Secondary</div><div class="hex">#1E3258</div><div class="var">--secondary</div><div class="role">Headings, labels, and any text sitting on a primary fill.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Neutrals</h3>
+        <div class="swatches">
+          <div class="swatch"><div class="chip" style="background:var(--paper);"></div><div class="meta"><div class="nm">Paper</div><div class="hex">#FBF7F0</div><div class="var">--paper</div><div class="role">Page background.</div></div></div>
+          <div class="swatch"><div class="chip" style="background:var(--paper-2);"></div><div class="meta"><div class="nm">Paper 2</div><div class="hex">#F3ECE0</div><div class="var">--paper-2</div><div class="role">Raised surfaces and soft gradients.</div></div></div>
+          <div class="swatch"><div class="chip" style="background:var(--ink);"></div><div class="meta"><div class="nm">Ink</div><div class="hex">#2A2622</div><div class="var">--ink</div><div class="role">Body text and strong text.</div></div></div>
+          <div class="swatch"><div class="chip" style="background:var(--ink-soft);"></div><div class="meta"><div class="nm">Ink soft</div><div class="hex">#5C544B</div><div class="var">--ink-soft</div><div class="role">Secondary text and captions.</div></div></div>
+          <div class="swatch"><div class="chip" style="background:var(--line);"></div><div class="meta"><div class="nm">Line</div><div class="hex">#E6DCCC</div><div class="var">--line</div><div class="role">Borders, dividers, dashed tracks.</div></div></div>
+        </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Support</h3>
+        <div class="swatches">
+          <div class="swatch"><div class="chip" style="background:var(--accent-soft);"></div><div class="meta"><div class="nm">Accent soft</div><div class="hex">#F2D9C6</div><div class="var">--accent-soft</div><div class="role">Soft tints and gentle fills.</div></div></div>
+          <div class="swatch"><div class="chip" style="background:var(--sage);"></div><div class="meta"><div class="nm">Sage</div><div class="hex">#7E8B6F</div><div class="var">--sage</div><div class="role">Tertiary accent for data and secondary bars.</div></div></div>
+          <div class="swatch"><div class="chip" style="background:var(--highlight);"></div><div class="meta"><div class="nm">Highlight</div><div class="hex">rgba(255,196,0,.5)</div><div class="var">--highlight</div><div class="role">Inline text highlight (the <mark>mark</mark> token).</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TYPE -->
+    <section class="ds-section">
+      <h2>Typography</h2>
+      <p class="ds-lead"><b>Fraunces</b> for display, <b>Hanken Grotesk</b> for everything functional. Headings and labels are navy, body is ink.</p>
+
+      <div class="type-row">
+        <div><span style="font-family:'Fraunces',serif;font-weight:500;font-size:48px;line-height:1.04;letter-spacing:-.02em;color:var(--secondary);">Title</span></div>
+        <div class="type-spec"><b>Display / H1</b><br>Fraunces 500 · clamp 40 to 68px<br>tracking -0.02em · secondary</div>
+      </div>
+      <div class="type-row">
+        <div><span style="font-family:'Fraunces',serif;font-weight:500;font-size:34px;letter-spacing:-.02em;color:var(--secondary);">Section title</span></div>
+        <div class="type-spec"><b>H2</b><br>Fraunces 500 · clamp 28 to 40px<br>tracking -0.02em · secondary</div>
+      </div>
+      <div class="type-row">
+        <div><span style="font-family:'Fraunces',serif;font-weight:600;font-size:21px;letter-spacing:-.01em;color:var(--ink);">Subhead</span></div>
+        <div class="type-spec"><b>H3</b><br>Fraunces 600 · 21px · ink</div>
+      </div>
+      <div class="type-row">
+        <div><span class="eyebrow">Eyebrow label</span></div>
+        <div class="type-spec"><b>Eyebrow</b><br>Hanken 600 · 12.5px · uppercase<br>tracking .18em · secondary</div>
+      </div>
+      <div class="type-row">
+        <div><span class="section-label"><span class="num">06</span> Section label</span></div>
+        <div class="type-spec"><b>Section label</b><br>Hanken 600 · 12.5px · uppercase .16em<br>number in Fraunces italic</div>
+      </div>
+      <div class="type-row">
+        <div><span style="font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--secondary);">Card label</span></div>
+        <div class="type-spec"><b>Card label / H4</b><br>Hanken 600 · 12px · uppercase .14em</div>
+      </div>
+      <div class="type-row">
+        <div><span style="font-size:18px;color:var(--ink-soft);">Body copy sets the pace at 18px with generous 1.7 line height for comfortable reading.</span></div>
+        <div class="type-spec"><b>Body</b><br>Hanken 400 · 18px · 1.7 · ink-soft</div>
+      </div>
+      <div class="type-row">
+        <div><span style="font-size:13.5px;font-style:italic;color:var(--ink-soft);">Caption text, italic.</span></div>
+        <div class="type-spec"><b>Caption</b><br>Hanken italic · 13.5px · ink-soft</div>
+      </div>
+    </section>
+
+    <!-- RADIUS / SPACE / SHADOW -->
+    <section class="ds-section">
+      <h2>Scale</h2>
+      <p class="ds-lead">Radius, spacing rhythm, layout widths, and elevation.</p>
+
+      <div class="ds-block">
+        <h3>Radius</h3>
+        <div class="token-grid">
+          <div class="token"><div class="demo-box"><div class="rad" style="border-radius:3px;"></div></div><div class="nm">XS</div><div class="val">3px · highlight</div></div>
+          <div class="token"><div class="demo-box"><div class="rad" style="border-radius:8px;"></div></div><div class="nm">SM</div><div class="val">8px · small frames</div></div>
+          <div class="token"><div class="demo-box"><div class="rad" style="border-radius:18px;"></div></div><div class="nm">MD</div><div class="val">18px · cards</div></div>
+          <div class="token"><div class="demo-box"><div class="rad" style="border-radius:22px;"></div></div><div class="nm">LG</div><div class="val">22px · panels</div></div>
+          <div class="token"><div class="demo-box"><div class="rad" style="border-radius:100px;"></div></div><div class="nm">Pill</div><div class="val">100px · buttons</div></div>
+        </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Spacing rhythm</h3>
+        <div class="space-row"><span class="lbl">paragraph 18</span><div class="space-bar" style="width:18px;"></div></div>
+        <div class="space-row"><span class="lbl">takeaways 22</span><div class="space-bar" style="width:22px;"></div></div>
+        <div class="space-row"><span class="lbl">block 24</span><div class="space-bar" style="width:24px;"></div></div>
+        <div class="space-row"><span class="lbl">gutter 28</span><div class="space-bar" style="width:28px;"></div></div>
+        <div class="space-row"><span class="lbl">section 46</span><div class="space-bar" style="width:46px;"></div></div>
+        <div class="ds-note">Content column <span class="mono">760px</span> · wide column <span class="mono">1080px</span> · side gutter <span class="mono">28px</span>.</div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Elevation</h3>
+        <div class="shadow-grid">
+          <div class="shadow-card" style="box-shadow:var(--shadow-pill);">Floating pill</div>
+          <div class="shadow-card" style="box-shadow:var(--shadow-lift);">Button lift</div>
+          <div class="shadow-card" style="box-shadow:var(--shadow-panel);">Panel</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPONENTS -->
+    <section class="ds-section">
+      <h2>Components</h2>
+      <p class="ds-lead">Every piece is built from the tokens above, so a change at the root flows through the whole system.</p>
+
+      <div class="ds-block">
+        <h3>Buttons</h3>
+        <div class="ds-stage">
+          <a href="#" class="cta">Try the prototype</a>
+          <a href="#" class="back">Back to work</a>
+        </div>
+        <div class="ds-note">Primary <span class="mono">.cta</span>: amber fill, navy text, pill radius, lift on hover. Outline <span class="mono">.back</span>: ink border, inverts on hover.</div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Badges</h3>
+        <div class="ds-stage">
+          <span class="badge">Current</span>
+          <span class="badge future">Phase 1</span>
+        </div>
+        <div class="ds-note">Filled badge = active state (amber + navy). Outline badge = upcoming state.</div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Tags &amp; pill</h3>
+        <div class="ds-stage">
+          <span class="tag">Product design</span>
+          <span class="tag">Front-end</span>
+          <span class="tag">AI prototyping</span>
+          <span class="pomo-pill"><span class="dot"></span>Focus · 24:00</span>
+        </div>
+        <div class="ds-note">Meta tags read on the page background. The status pill floats with a soft shadow and a blinking dot.</div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Card</h3>
+        <div class="ds-stage col">
+          <div class="paper-card"><strong>Paper card.</strong> The reusable text container behind framing notes and roadmap milestones. Paper fill, hairline border, 18px radius.</div>
+        </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Label grid</h3>
+        <div class="ds-stage col">
+          <div class="glance cols-3">
+            <div class="cell"><h4>Business</h4><p>An uppercase navy label over a short body line.</p></div>
+            <div class="cell"><h4>Tech</h4><p>Cells are split by a single hairline, with rounded outer corners.</p></div>
+            <div class="cell"><h4>Design</h4><p>Collapses to one column on narrow screens.</p></div>
+          </div>
+        </div>
+        <div class="ds-note"><span class="mono">.glance</span> ships as 2-up; add <span class="mono">.cols-3</span> for three.</div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Image slot</h3>
+        <div class="ds-stage col">
+          <div class="imgslot"><div class="frame"><div class="ico">&#9638;</div><div class="label">Image slot</div><div class="hint">Drop an &lt;img&gt; in and the placeholder chrome disappears</div></div></div>
+        </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Takeaway item</h3>
+        <div class="ds-stage col">
+          <div class="takeaways"><div class="take"><span class="star">&#10022;</span><div><h3>Getting a pet into the system</h3><p>A star marker, a Fraunces subhead, and a body line. Used for the key sub-sections and takeaways.</p></div></div></div>
+        </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Pull quote</h3>
+        <div class="ds-stage col">
+          <div class="pullquote"><blockquote>Why settle for a compromise when you can design the whole experience.</blockquote></div>
+        </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Roadmap nodes</h3>
+        <div class="ds-stage">
+          <div class="nodes">
+            <div class="node-demo"><div class="node current"><svg width="26" viewBox="0 0 26 18" aria-hidden="true"><ellipse cx="11" cy="11" rx="7" ry="4.5" fill="var(--ink)"/><circle cx="18" cy="8" r="3.4" fill="var(--ink)"/><path d="M15.4 5.2 L15.8 2.6 L17.4 4.7 Z" fill="var(--ink)"/><path d="M19 5 L19.6 2.6 L20.8 4.9 Z" fill="var(--ink)"/><rect x="6" y="13" width="1.4" height="4" fill="var(--ink)"/><rect x="9" y="13" width="1.4" height="4" fill="var(--ink)"/><rect x="13" y="13" width="1.4" height="4" fill="var(--ink)"/><path d="M4 9 q-3 -1 -3 -4" stroke="var(--ink)" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div class="cap">Current<br>(hosts walking cat)</div></div>
+            <div class="node-demo"><div class="node"></div><div class="cap">Upcoming</div></div>
+          </div>
+        </div>
+        <div class="ds-note">Nodes sit on a dashed <span class="mono">--line</span> track. The current node is paper with an amber ring and carries the animated cat marker.</div>
+      </div>
+
+      <div class="ds-block">
+        <h3>AI marker</h3>
+        <div class="ds-stage">
+          <svg width="64" height="64" viewBox="-26 -26 52 52" aria-label="AI sparkle marker">
+            <defs>
+              <linearGradient id="aiGrad" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0" stop-color="#F6953C"/><stop offset="0.38" stop-color="#F2618A"/>
+                <stop offset="0.68" stop-color="#9266EF"/><stop offset="1" stop-color="#4A90F4"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,-20 C2.2,-8 8,-2.2 20,0 C8,2.2 2.2,8 0,20 C-2.2,8 -8,2.2 -20,0 C-8,-2.2 -2.2,-8 0,-20 Z" fill="url(#aiGrad)" stroke="url(#aiGrad)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+          <span class="mono">aiGrad: #F6953C &rarr; #F2618A &rarr; #9266EF &rarr; #4A90F4</span>
+        </div>
+        <div class="ds-note">The rainbow sparkle flags the AI-chosen path in diagrams. The only place a multi-color gradient is allowed.</div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Highlight</h3>
+        <div class="ds-stage col">
+          <p style="margin:0;font-size:17px;">Focused time turns an abstract countdown into a <mark>shared journey</mark> you take together.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="ds-foot">Amie's Design System &middot; shared tokens and components.</footer>
+  </div>
+</body>
+</html>

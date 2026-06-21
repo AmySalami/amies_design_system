@@ -1,0 +1,38 @@
+/* =========================================================
+   Cat Walking Me Working - Design Tokens
+   Single source of truth. Edit a value here and it updates
+   the design system page and the portfolio at once.
+   Both pages load this file with:
+     <link rel="stylesheet" href="design-system.css" />
+   Keep this file in the same folder as the HTML files.
+   ========================================================= */
+:root{
+  /* ---- color ---- */
+  --paper:#FBF7F0;       /* page background */
+  --paper-2:#F3ECE0;     /* raised surfaces / gradients */
+  --ink:#2A2622;         /* body + strong text */
+  --ink-soft:#5C544B;    /* secondary text, captions */
+  --line:#E6DCCC;        /* borders, dividers, dashed tracks */
+  --accent:#ffc400;      /* PRIMARY - fills & icons only */
+  --secondary:#1e3258;   /* SECONDARY - headings, labels, text on primary */
+  --accent-soft:#F2D9C6; /* soft accent tint */
+  --sage:#7E8B6F;        /* tertiary accent (data viz) */
+  --highlight:rgba(255,196,0,.5); /* inline text highlight (mark) */
+
+  /* ---- layout ---- */
+  --max:760px;
+  --wide:1080px;
+  --gutter:28px;
+
+  /* ---- radius ---- */
+  --r-xs:3px;
+  --r-sm:8px;
+  --r-md:18px;
+  --r-lg:22px;
+  --r-pill:100px;
+
+  /* ---- elevation ---- */
+  --shadow-pill:0 8px 20px -14px rgba(42,38,34,.5);
+  --shadow-lift:0 16px 32px -16px rgba(201,96,46,.85);
+  --shadow-panel:0 30px 60px -38px rgba(42,38,34,.4);
+}
