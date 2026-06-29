@@ -49,7 +49,7 @@
     .ds-stage — neutral preview container for the storybook.
     Use it when the component has no visible frame of its own (buttons, badges, tags, nav, quotes).
     Omit it when the component already has its own border or container
-    (paper-card, glance, imgslot — their own chrome is the demo).
+    (card, glance, imgslot — their own chrome is the demo).
   */
   .ds-stage{
     background:var(--paper);
@@ -133,7 +133,12 @@
   .pomo-pill .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);animation:blink 1.6s ease-in-out infinite;}
   @keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
 
-  .paper-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:22px 24px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:22px 24px;}
+  .card-content{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px 28px;overflow:hidden;display:flex;flex-direction:column;}
+  .card-content:not(:has(.card-img)){padding-bottom:68px;}
+  .card-img{margin:20px -28px -28px -28px;flex:1;min-height:80px;background:var(--paper-2);overflow:hidden;}
+  .card-img img{width:100%;height:100%;object-fit:cover;display:block;}
+  .card-img .placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:var(--text-eyebrow);color:var(--ink-soft);}
 
   .glance{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;width:100%;}
   .glance.cols-3{grid-template-columns:repeat(3,1fr);}
@@ -387,7 +392,27 @@
 
       <div class="ds-block">
         <h3>Card</h3>
-        <div class="paper-card"><strong>Paper card.</strong> The reusable text container behind framing notes and roadmap milestones. Paper fill, hairline border, 18px radius.</div>
+        <div class="card"><strong>Card.</strong> The reusable text container behind framing notes and roadmap milestones. Paper fill, hairline border, 18px radius.</div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Card content</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:var(--space-block);">
+          <div class="card-content" style="grid-row:span 2;">
+            <div style="font-size:var(--text-h3);font-family:var(--font-display);font-weight:var(--weight-semibold);color:var(--secondary);margin-bottom:6px;">Project title</div>
+            <div style="font-size:var(--text-sm);color:var(--ink-soft);">Category, Type, Year</div>
+            <div class="card-img"><div class="placeholder">Image</div></div>
+          </div>
+          <div class="card-content">
+            <div style="font-size:var(--text-h3);font-family:var(--font-display);font-weight:var(--weight-semibold);color:var(--secondary);margin-bottom:6px;">Project title</div>
+            <div style="font-size:var(--text-sm);color:var(--ink-soft);">Category, Type, Year</div>
+          </div>
+          <div class="card-content">
+            <div style="font-size:var(--text-h3);font-family:var(--font-display);font-weight:var(--weight-semibold);color:var(--secondary);margin-bottom:6px;">Project title</div>
+            <div style="font-size:var(--text-sm);color:var(--ink-soft);">Category, Type, Year</div>
+          </div>
+        </div>
+        <div class="ds-note"><span class="mono">.card-content</span>: paper fill, hairline border, 22px radius. Add <span class="mono">.card-img</span> inside for an optional image that bleeds to the top edge. Omit it for a text-only tile.</div>
       </div>
 
       <div class="ds-block">
