@@ -333,22 +333,18 @@
 
       <div class="ds-block">
         <h3>Card content</h3>
-        <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:var(--space-block);">
+        <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:180px 180px;gap:var(--space-block);">
           <div class="card-content" style="grid-row:span 2;">
-            <div style="font-size:var(--text-h3);font-family:var(--font-display);font-weight:var(--weight-semibold);color:var(--secondary);margin-bottom:6px;">Project title</div>
-            <div style="font-size:var(--text-sm);color:var(--ink-soft);">Category, Type, Year</div>
-            <div class="card-img"><div class="placeholder">Image</div></div>
+            <div class="card-img"><div class="placeholder">Large</div></div>
           </div>
           <div class="card-content">
-            <div style="font-size:var(--text-h3);font-family:var(--font-display);font-weight:var(--weight-semibold);color:var(--secondary);margin-bottom:6px;">Project title</div>
-            <div style="font-size:var(--text-sm);color:var(--ink-soft);">Category, Type, Year</div>
+            <div class="card-img"><div class="placeholder">Small</div></div>
           </div>
           <div class="card-content">
-            <div style="font-size:var(--text-h3);font-family:var(--font-display);font-weight:var(--weight-semibold);color:var(--secondary);margin-bottom:6px;">Project title</div>
-            <div style="font-size:var(--text-sm);color:var(--ink-soft);">Category, Type, Year</div>
+            <div class="card-img"><div class="placeholder">Small</div></div>
           </div>
         </div>
-        <div class="ds-note"><span class="mono">.card-content</span>: paper fill, hairline border, 22px radius. Add <span class="mono">.card-img</span> inside for an optional image that bleeds to the top edge. Omit it for a text-only tile.</div>
+        <div class="ds-note"><span class="mono">.card-content</span>: image-only tile, 22px radius, no border. Large card uses <span class="mono">grid-row:span 2</span> — height equals 2 small cards plus the gap automatically.</div>
       </div>
 
       <div class="ds-block">
