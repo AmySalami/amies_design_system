@@ -149,9 +149,14 @@ body h3{font-family:var(--font-display);font-weight:var(--weight-semibold);font-
 
 /* ---- card ---- */
 .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:22px 24px;}
-.card-content{border-radius:var(--r-lg);overflow:hidden;}
-.card-img{width:100%;height:100%;background:var(--paper-2);}
+.card-content{border-radius:var(--r-lg);overflow:hidden;position:relative;cursor:pointer;}
+.card-img{width:100%;height:100%;background:var(--paper-2);transition:filter .35s,transform .35s;}
 .card-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.card-content:hover .card-img{filter:blur(20px) brightness(.6);transform:scale(1.06);}
+.card-label{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px;opacity:0;transition:opacity .3s;}
+.card-label .card-title{font-family:var(--font-display);font-weight:var(--weight-semibold);font-size:var(--text-h3);color:var(--white);margin-bottom:4px;}
+.card-label .card-meta{font-size:var(--text-sm);color:var(--white-soft);}
+.card-content:hover .card-label{opacity:1;}
 
 /* ---- label grid (glance) ---- */
 .glance{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;width:100%;}
