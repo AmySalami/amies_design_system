@@ -34,7 +34,8 @@
   --space-paragraph:16px; /* between body paragraphs */
   --space-takeaway:20px;  /* gap between stacked list / takeaway items */
   --space-block:24px;     /* between content blocks within a section */
-  --space-section:46px;   /* between major page sections */
+  --space-section:48px;   /* between major page sections */
+  --space-zone:80px;      /* between distinct page zones (hero, work, etc.) */
 
   /* ---- layout ---- */
   --max:760px;
