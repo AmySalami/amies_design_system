@@ -14,6 +14,7 @@
   --ink-wash:rgba(42,38,34,.06); /* code / mono backgrounds */
   --line:#E6DCCC;        /* borders, dividers, dashed tracks */
   --accent:#ffc400;      /* PRIMARY - fills & icons only */
+  --accent-dark:#cd9e00; /* darker amber - hover states on accent elements */
   --secondary:#1e3258;   /* SECONDARY - headings, labels, text on primary */
   --accent-soft:#F2D9C6; /* soft accent tint */
   --sage:#7E8B6F;        /* tertiary accent (data viz) */
@@ -29,10 +30,16 @@
   --ai-3:#9266EF;
   --ai-4:#4A90F4;
 
+  /* ---- spacing ---- */
+  --space-paragraph:16px; /* between body paragraphs */
+  --space-takeaway:20px;  /* gap between stacked list / takeaway items */
+  --space-block:24px;     /* between content blocks within a section */
+  --space-section:46px;   /* between major page sections */
+
   /* ---- layout ---- */
   --max:760px;
   --wide:1080px;
-  --gutter:28px;
+  --gutter:32px;          /* side padding on page containers */
 
   /* ---- radius ---- */
   --r-xs:3px;
@@ -44,7 +51,7 @@
   /* ---- elevation ---- */
   --shadow-subtle:0 1px 3px rgba(0,0,0,.05); /* active nav button */
   --shadow-pill:0 8px 20px -14px rgba(42,38,34,.5);
-  --shadow-lift:0 16px 32px -16px rgba(201,96,46,.85);
+  --shadow-lift:0 16px 32px -16px rgba(255,196,0,.85); /* derived from --accent */
   --shadow-panel:0 30px 60px -38px rgba(42,38,34,.4);
 
   /* ---- typography: fonts ---- */
@@ -93,3 +100,13 @@
   --tracking-wider:0.16em;
   --tracking-widest:0.18em;
 }
+
+/* ---- spacing rules ---- */
+/* only p+p is applied globally — other spacing tokens are for consumer use */
+body p+p{margin-top:var(--space-paragraph);}
+
+/* ---- heading rules ---- */
+/* body h* for specificity over Tailwind preflight */
+body h1{font-family:var(--font-display);font-weight:var(--weight-medium);font-size:var(--text-h1);color:var(--secondary);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);}
+body h2{font-family:var(--font-display);font-weight:var(--weight-medium);font-size:var(--text-h2);color:var(--secondary);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);}
+body h3{font-family:var(--font-display);font-weight:var(--weight-semibold);font-size:var(--text-h3);color:var(--ink);letter-spacing:var(--tracking-snug);}

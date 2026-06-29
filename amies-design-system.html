@@ -45,9 +45,14 @@
     color:var(--secondary);margin-bottom:18px;
   }
 
-  /* a neutral stage to show a live component on */
+  /*
+    .ds-stage — neutral preview container for the storybook.
+    Use it when the component has no visible frame of its own (buttons, badges, tags, nav, quotes).
+    Omit it when the component already has its own border or container
+    (paper-card, glance, imgslot — their own chrome is the demo).
+  */
   .ds-stage{
-    background:linear-gradient(180deg,var(--paper-warm),var(--paper-2));
+    background:var(--paper);
     border:1px solid var(--line);border-radius:var(--r-md);
     padding:34px 30px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;
   }
@@ -86,9 +91,13 @@
   .token .nm{font-weight:var(--weight-semibold);font-size:var(--text-caption);}
   .token .val{font-family:var(--font-mono);font-size:var(--text-label);color:var(--ink-soft);margin-top:2px;}
 
-  .space-row{display:flex;align-items:center;gap:16px;padding:10px 0;}
-  .space-bar{background:var(--accent);height:14px;border-radius:3px;}
-  .space-row .lbl{font-family:var(--font-mono);font-size:var(--text-eyebrow);color:var(--ink-soft);width:120px;flex-shrink:0;}
+  .space-bar{background:var(--accent);height:10px;border-radius:3px;display:inline-block;vertical-align:middle;}
+  .space-table{width:100%;border-collapse:collapse;}
+  .space-table th{font-size:var(--text-label);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--secondary);text-align:left;padding:10px 14px;border-bottom:2px solid var(--line);}
+  .space-table td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:var(--text-eyebrow);vertical-align:middle;color:var(--ink-soft);}
+  .space-table td:first-child{font-family:var(--font-mono);color:var(--secondary);white-space:nowrap;}
+  .space-table td:nth-child(2){white-space:nowrap;}
+  .space-table tbody tr:last-child td{border-bottom:none;}
 
   .shadow-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px;}
   .shadow-card{background:var(--paper);border-radius:var(--r-md);height:90px;display:flex;align-items:center;justify-content:center;font-size:var(--text-eyebrow);color:var(--ink-soft);}
@@ -143,7 +152,7 @@
   .imgslot .frame .label{font-size:var(--text-caption);font-weight:var(--weight-semibold);color:var(--ink);}
   .imgslot .frame .hint{font-size:var(--text-eyebrow);}
 
-  .takeaways{display:flex;flex-direction:column;gap:22px;width:100%;}
+  .takeaways{display:flex;flex-direction:column;gap:var(--space-takeaway);width:100%;}
   .take{display:flex;gap:16px;align-items:flex-start;}
   .take .star{color:var(--accent);font-size:var(--text-body);line-height:var(--leading-medium);flex-shrink:0;}
   .take h3{font-family:var(--font-display);font-weight:var(--weight-semibold);font-size:var(--text-h3);letter-spacing:var(--tracking-snug);margin-bottom:8px;color:var(--ink);}
@@ -275,12 +284,49 @@
 
       <div class="ds-block">
         <h3>Spacing rhythm</h3>
-        <div class="space-row"><span class="lbl">paragraph 18</span><div class="space-bar" style="width:18px;"></div></div>
-        <div class="space-row"><span class="lbl">takeaways 22</span><div class="space-bar" style="width:22px;"></div></div>
-        <div class="space-row"><span class="lbl">block 24</span><div class="space-bar" style="width:24px;"></div></div>
-        <div class="space-row"><span class="lbl">gutter 28</span><div class="space-bar" style="width:28px;"></div></div>
-        <div class="space-row"><span class="lbl">section 46</span><div class="space-bar" style="width:46px;"></div></div>
-        <div class="ds-note">Content column <span class="mono">760px</span> · wide column <span class="mono">1080px</span> · side gutter <span class="mono">28px</span>.</div>
+        <table class="space-table">
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Size</th>
+              <th>Use when</th>
+              <th>CSS rule</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>--space-paragraph</td>
+              <td><div class="space-bar" style="width:16px;"></div> 16px</td>
+              <td>Between body paragraphs</td>
+              <td><span class="mono">p + p { margin-top }</span> — applied globally by this file</td>
+            </tr>
+            <tr>
+              <td>--space-takeaway</td>
+              <td><div class="space-bar" style="width:20px;"></div> 20px</td>
+              <td>Gap between stacked items: takeaway list, card stack, or any repeated vertical group</td>
+              <td><span class="mono">gap</span> on flex containers</td>
+            </tr>
+            <tr>
+              <td>--space-block</td>
+              <td><div class="space-bar" style="width:24px;"></div> 24px</td>
+              <td>Between distinct blocks within the same section</td>
+              <td><span class="mono">margin-bottom</span> on block components</td>
+            </tr>
+            <tr>
+              <td>--gutter</td>
+              <td><div class="space-bar" style="width:32px;"></div> 32px</td>
+              <td>Side padding keeping content from the viewport edge</td>
+              <td><span class="mono">padding-inline</span> on page containers</td>
+            </tr>
+            <tr>
+              <td>--space-section</td>
+              <td><div class="space-bar" style="width:46px;"></div> 46px</td>
+              <td>Between major page sections</td>
+              <td><span class="mono">padding-block</span> on section elements</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="ds-note">Content column <span class="mono">--max 760px</span> · wide column <span class="mono">--wide 1080px</span> · side gutter <span class="mono">--gutter 32px</span>. Only <span class="mono">p + p</span> is applied globally, all other spacing tokens are for consumer use.</div>
       </div>
 
       <div class="ds-block">
@@ -310,13 +356,13 @@
 
       <div class="ds-block">
         <h3>Navigation tab</h3>
-        <div class="ds-stage" style="background:var(--secondary);justify-content:center;">
+        <div class="ds-stage" style="justify-content:center;">
           <nav class="nav-bar">
             <a class="nav-btn nav-active">My Crafts</a>
             <a class="nav-btn">My Story</a>
           </nav>
         </div>
-        <div class="ds-note"><span class="mono">.nav-bar</span>: glass pill container, blur + faint white bg. <span class="mono">.nav-btn</span>: navy text, pill radius. <span class="mono">.nav-active</span>: white-mid fill + subtle shadow. Hover: white-soft fill, ink text, bold weight. Note: <span class="mono">--accent-dark</span> from the consumer was mapped to <span class="mono">--ink</span>.</div>
+        <div class="ds-note"><span class="mono">.nav-bar</span>: glass pill container, blur + faint white bg. <span class="mono">.nav-btn</span>: navy text, pill radius. <span class="mono">.nav-active</span>: white-mid fill + subtle shadow. Hover and active text use <span class="mono">--ink</span>, not <span class="mono">--accent-dark</span>.</div>
       </div>
 
       <div class="ds-block">
@@ -341,28 +387,22 @@
 
       <div class="ds-block">
         <h3>Card</h3>
-        <div class="ds-stage col">
-          <div class="paper-card"><strong>Paper card.</strong> The reusable text container behind framing notes and roadmap milestones. Paper fill, hairline border, 18px radius.</div>
-        </div>
+        <div class="paper-card"><strong>Paper card.</strong> The reusable text container behind framing notes and roadmap milestones. Paper fill, hairline border, 18px radius.</div>
       </div>
 
       <div class="ds-block">
         <h3>Label grid</h3>
-        <div class="ds-stage col">
-          <div class="glance cols-3">
+        <div class="glance cols-3">
             <div class="cell"><h4>Business</h4><p>An uppercase navy label over a short body line.</p></div>
             <div class="cell"><h4>Tech</h4><p>Cells are split by a single hairline, with rounded outer corners.</p></div>
             <div class="cell"><h4>Design</h4><p>Collapses to one column on narrow screens.</p></div>
           </div>
-        </div>
         <div class="ds-note"><span class="mono">.glance</span> ships as 2-up; add <span class="mono">.cols-3</span> for three.</div>
       </div>
 
       <div class="ds-block">
         <h3>Image slot</h3>
-        <div class="ds-stage col">
-          <div class="imgslot"><div class="frame"><div class="ico">&#9638;</div><div class="label">Image slot</div><div class="hint">Drop an &lt;img&gt; in and the placeholder chrome disappears</div></div></div>
-        </div>
+        <div class="imgslot"><div class="frame"><div class="ico">&#9638;</div><div class="label">Image slot</div><div class="hint">Drop an &lt;img&gt; in and the placeholder chrome disappears</div></div></div>
       </div>
 
       <div class="ds-block">

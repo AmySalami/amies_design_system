@@ -49,6 +49,17 @@ python3 -m http.server 8000
 # open http://localhost:8000/amies-design-system.html
 ```
 
+## Storybook preview conventions
+
+When adding a new component to `amies-design-system.html`, follow this rule for
+whether to wrap it in `.ds-stage`:
+
+- **Use `.ds-stage`** when the component has no visible frame of its own.
+  Examples: buttons, badges, tags, nav bar, pull quote.
+- **Omit `.ds-stage`** when the component already has its own border or
+  container. The component's own chrome is the demo.
+  Examples: paper-card, glance (label grid), imgslot.
+
 ## Editorial conventions (kept across all surfaces)
 
 - No em dashes or en dashes anywhere. Use commas or periods.
