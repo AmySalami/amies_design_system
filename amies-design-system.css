@@ -168,7 +168,9 @@ body h3{font-family:var(--font-display);font-weight:var(--weight-semibold);font-
 
 /* ---- image slot ---- */
 .imgslot{width:100%;}
-.imgslot .frame{border:1.5px dashed var(--line);border-radius:var(--r-md);background:linear-gradient(180deg,var(--paper-warm),var(--paper-2));aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink-soft);text-align:center;padding:24px;}
+.imgslot .frame{border:1.5px dashed var(--line);border-radius:var(--r-md);background:linear-gradient(180deg,var(--paper-warm),var(--paper-2));aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink-soft);text-align:center;padding:24px;overflow:hidden;}
+.imgslot .frame:has(img){border:none;background:none;padding:0;}
+.imgslot .frame img{width:100%;height:100%;object-fit:cover;display:block;}
 .imgslot .frame .ico{font-size:var(--text-icon);opacity:.6;}
 .imgslot .frame .label{font-size:var(--text-caption);font-weight:var(--weight-semibold);color:var(--ink);}
 .imgslot .frame .hint{font-size:var(--text-eyebrow);}
