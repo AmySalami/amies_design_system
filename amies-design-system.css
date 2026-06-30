@@ -36,7 +36,7 @@
   --space-block:24px;     /* between content blocks within a section */
   --space-section:48px;   /* between major page sections */
   --space-zone:80px;      /* between distinct page zones (hero, work, etc.) */
-  --space-page:160px;     /* top/bottom breathing room for the whole page */
+  --space-page:260px;     /* top/bottom breathing room for the whole page */
 
   /* ---- layout ---- */
   --max:760px;
