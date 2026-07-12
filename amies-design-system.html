@@ -288,6 +288,16 @@
       </div>
 
       <div class="ds-block">
+        <h3>Content inset</h3>
+        <div style="width:100%;border-radius:var(--r-sm);overflow:hidden;display:grid;grid-template-columns:var(--content-inset) 1fr var(--content-inset);height:72px;">
+          <div style="background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:var(--text-eyebrow);color:var(--ink-soft);letter-spacing:var(--tracking-wide);">← inset</div>
+          <div style="background:var(--paper-2);display:flex;align-items:center;justify-content:center;font-size:var(--text-eyebrow);color:var(--ink);letter-spacing:var(--tracking-wide);">CONTENT</div>
+          <div style="background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:var(--text-eyebrow);color:var(--ink-soft);letter-spacing:var(--tracking-wide);">inset →</div>
+        </div>
+        <div class="ds-note"><span class="mono">--content-inset: clamp(80px, 12vw, 240px)</span> — use as <span class="mono">padding-inline</span> on project detail content containers. At 1280px viewport: 12vw ≈ 154px per side, giving ~972px content width.</div>
+      </div>
+
+      <div class="ds-block">
         <h3>Elevation</h3>
         <div class="shadow-grid">
           <div class="shadow-card" style="box-shadow:var(--shadow-pill);">Floating pill</div>

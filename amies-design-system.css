@@ -38,6 +38,7 @@
   --space-zone:80px;      /* between distinct page zones (hero, work, etc.) */
   --space-region:160px;   /* between large content regions, bigger than a zone */
   --space-page:400px;     /* top/bottom breathing room for the whole page */
+  --content-inset:clamp(80px,12vw,240px); /* horizontal inset for project detail page content */
 
   /* ---- layout ---- */
   --max:760px;
