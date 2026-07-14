@@ -30,7 +30,15 @@
   --ai-3:#9266EF;
   --ai-4:#4A90F4;
 
-  /* ---- spacing ---- */
+  /* ---- spacing ----
+     Layout tiers (naming + grouping convention; token values unchanged):
+       inside a Block   (heading -> its text, para -> para)   = --space-paragraph
+       between Blocks   (unit -> unit inside a Section)        = --space-block
+       between Sections (numbered chapters 01, 02 ...)         = --space-zone
+     A Block = a heading + the text explaining it, OR a card / image+caption /
+     pull quote / list. A heading and its own paragraph are the SAME Block
+     (--space-paragraph), never --space-block. --space-block only ever
+     separates two DIFFERENT Blocks. */
   --space-paragraph:16px; /* between body paragraphs */
   --space-takeaway:20px;  /* gap between stacked list / takeaway items */
   --space-block:24px;     /* between content blocks within a section */
