@@ -152,6 +152,9 @@ body h3{font-family:var(--font-display);font-weight:var(--weight-semibold);font-
 
 /* ---- card ---- */
 .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:22px 24px;}
+.card-fill{background:var(--paper-2);border-radius:var(--r-lg);padding:28px 32px;}
+.card-fill .badge{margin-bottom:10px;display:inline-block;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:var(--space-block);}
 .card-content{border-radius:var(--r-lg);overflow:hidden;position:relative;cursor:pointer;}
 .card-img{width:100%;height:100%;background:var(--paper-2);transition:filter .35s,transform .35s;}
 .card-img img{width:100%;height:100%;object-fit:cover;display:block;}
