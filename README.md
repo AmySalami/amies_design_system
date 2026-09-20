@@ -1,56 +1,60 @@
 # Amie's Design System
 
-[![Open Storybook](https://img.shields.io/badge/Open-Storybook-ffc400?style=for-the-badge&labelColor=1e3258)](https://amysalami.github.io/amies_design_system/amies-design-system.html)
+[![Open Live Preview](https://img.shields.io/badge/Open-Live_Preview-ffc400?style=for-the-badge&labelColor=1e3258)](https://amysalami.github.io/amies_design_system/amies-design-system.html)
 
-เปิด live preview: https://amysalami.github.io/amies_design_system/amies-design-system.html
+Open the live preview: https://amysalami.github.io/amies_design_system/amies-design-system.html
 
-ระบบดีไซน์กลาง (design tokens และ components ที่ใช้ซ้ำ) สำหรับทุกโปรเจกต์
-นี่คือ single source of truth แก้ token ที่นี่ที่เดียว
+The central design system (design tokens and reusable components) for every project.
+This is the single source of truth, edit a token here and only here.
 
-## โครงสร้าง
+## Structure
 
 ```
 .
-├── amies-design-system.css     # tokens (สี ฟอนต์ spacing radius elevation)
-├── amies-design-system.html    # storybook / หน้า preview ของระบบ
+├── amies-design-system.css     # tokens (color, font, spacing, radius, elevation)
+├── amies-design-system.html    # the preview page for the system
 └── README.md
 ```
 
-repo นี้มีแค่ "ตัวระบบ" กับ "หน้า preview" เท่านั้น โปรเจกต์ที่ใช้งานจริง
-(พอร์ต, product) เป็น consumer แยก repo ไม่อยู่ในนี้
+This repo holds only "the system itself" and "the preview page". The projects that
+actually use it (portfolio, products) are consumers in their own repos, not in here.
 
-## preview บนเครื่อง
+## Local preview
 
 ```bash
 python3 -m http.server 8000
 ```
 
-เปิด `http://localhost:8000/amies-design-system.html`
-(ต้องเสิร์ฟผ่าน http ไม่ใช่ดับเบิลคลิกเปิดไฟล์ตรง ๆ)
+Open `http://localhost:8000/amies-design-system.html`
+(it has to be served over http, not by double clicking the file open directly)
 
-## แก้ token
+## Editing tokens
 
-แก้ค่าใน `amies-design-system.css` (เช่น `--accent`) แล้ว commit + push
-หน้า preview จะอัปเดตทันที ส่วน consumer แต่ละตัวต้อง sync ตาม
-(ดู process ใน README ของ repo นั้น)
+Edit a value in `amies-design-system.css` (for example `--accent`), then commit and push.
+The preview page updates immediately. Each consumer has to be synced separately
+(see the process in that repo's README).
 
-## แนวคิดการแบ่งชั้น (layer)
+## Layering
 
-ของที่ควรอยู่ใน repo นี้ vs อยู่กับโปรเจกต์เอง:
+What belongs in this repo vs what stays with the project itself:
 
-- **Foundations (อยู่ที่นี่):** tokens ทั้งหมด ใช้ร่วมกันได้ทุกโปรเจกต์
-- **Shared components (อยู่ที่นี่ได้):** ปุ่ม badge card ที่ใช้ซ้ำจริงหลายโปรเจกต์
-- **Component เฉพาะโปรเจกต์ (อยู่กับโปรเจกต์):** เช่น roadmap หรือ pull quote
-  ของพอร์ต, data table หรือ form ของ product อย่ายัดเข้าระบบกลาง
+- **Foundations (here):** all tokens, shared by every project.
+- **Shared components (can live here):** buttons, badge, card, the things genuinely
+  reused across several projects.
+- **Project specific components (stay with the project):** for example the roadmap or
+  pull quote of the portfolio, the data table or form of a product. Do not push those
+  into the central system.
 
-> หลักคิด: ถ้ามันใช้ซ้ำจริงค่อยยกขึ้นมากลาง อย่ายกของที่ใช้ที่เดียว
+> The principle: promote something into the shared layer only once it is genuinely
+> reused. Do not promote something that is used in one place.
 
-## หลักการใช้สี
+## Colour usage
 
-- **Primary `--accent` (#ffc400)** ใช้กับพื้นและไอคอนเท่านั้น ไม่ใช้กับตัวอักษร
-- **Secondary `--secondary` (#1e3258)** ใช้กับหัวข้อ label และตัวอักษรบนพื้น primary
+- **Primary `--accent` (#ffc400)** is for surfaces and icons only, never for text.
+- **Secondary `--secondary` (#1e3258)** is for headings, labels, and text sitting on a
+  primary surface.
 
-## โฮสต์ออนไลน์
+## Hosting online
 
-push ขึ้น GitHub แล้วเปิด GitHub Pages หรือเชื่อม Netlify / Vercel
-เพื่อให้หน้า storybook มีลิงก์เว็บให้ทีมเปิดดูได้
+Push to GitHub and turn on GitHub Pages, or connect Netlify / Vercel, so the preview
+page has a web link the team can open.

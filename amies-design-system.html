@@ -46,7 +46,7 @@
   }
 
   /*
-    .ds-stage — neutral preview container for the storybook.
+    .ds-stage — neutral container for the demos on this page.
     Use it when the component has no visible frame of its own (buttons, badges, tags, nav, quotes).
     Omit it when the component already has its own border or container
     (card, glance, imgslot — their own chrome is the demo).
@@ -102,10 +102,10 @@
   .shadow-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px;}
   .shadow-card{background:var(--paper);border-radius:var(--r-md);height:90px;display:flex;align-items:center;justify-content:center;font-size:var(--text-eyebrow);color:var(--ink-soft);}
 
-  /* storybook-only: demo placeholder inside card-img */
+  /* preview-only: demo placeholder inside card-img */
   .card-img .placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:var(--text-eyebrow);color:var(--ink-soft);}
 
-  /* roadmap node samples — project-specific, stays in storybook only */
+  /* roadmap node samples — project-specific, stays in the preview page only */
   .nodes{display:flex;gap:40px;flex-wrap:wrap;}
   .node-demo{text-align:center;}
   .node{width:42px;height:42px;border-radius:50%;background:var(--line);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;}

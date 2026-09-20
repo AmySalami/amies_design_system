@@ -5,7 +5,7 @@ Context for Claude Code. Read this before making changes.
 ## What this repo is
 
 The central design system (single source of truth) for Amie's projects.
-It holds design tokens and a storybook preview page. Consumer projects
+It holds design tokens and a preview page. Consumer projects
 (portfolio, future products) vendor a copy of the CSS. This repo contains
 only the system and its preview, never the consumer apps.
 
@@ -13,7 +13,7 @@ only the system and its preview, never the consumer apps.
 
 - `amies-design-system.css` — all design tokens (CSS custom properties). This
   is the single source of truth. Edit tokens here only.
-- `amies-design-system.html` — storybook / preview page that documents every
+- `amies-design-system.html` — preview page that documents every
   token and component. Links the CSS above.
 - `README.md` — usage, local preview, layering principle.
 
@@ -49,7 +49,7 @@ python3 -m http.server 8000
 # open http://localhost:8000/amies-design-system.html
 ```
 
-## Storybook preview conventions
+## Preview page conventions
 
 When adding a new component to `amies-design-system.html`, follow this rule for
 whether to wrap it in `.ds-stage`:
