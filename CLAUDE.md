@@ -71,3 +71,7 @@ whether to wrap it in `.ds-stage`:
 Consumers currently use Path B (a vendored copy of `amies-design-system.css`).
 When a second product appears, move to an npm package so updates sync via
 `npm update` instead of manual copying.
+
+The CSS header carries a `Version` line. Bump it and tag the commit on any change
+to that file, patch for a value, minor for a new token or component. A consumer
+has only that number to tell which copy it vendored.

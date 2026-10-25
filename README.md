@@ -34,6 +34,10 @@ Edit a value in `amies-design-system.css` (for example `--accent`), then commit 
 The preview page updates immediately. Each consumer has to be synced separately
 (see the process in that repo's README).
 
+Bump `Version` in the header comment of `amies-design-system.css` and tag the commit
+(`git tag v1.0.1 && git push --tags`). A consumer vendors the file by copying it, so
+the number in the header is the only way to tell which copy it has.
+
 ## Layering
 
 What belongs in this repo vs what stays with the project itself:
@@ -41,8 +45,8 @@ What belongs in this repo vs what stays with the project itself:
 - **Foundations (here):** all tokens, shared by every project.
 - **Shared components (can live here):** buttons, badge, card, the things genuinely
   reused across several projects.
-- **Project specific components (stay with the project):** for example the roadmap or
-  pull quote of the portfolio, the data table or form of a product. Do not push those
+- **Project specific components (stay with the project):** for example the roadmap
+  nodes of the portfolio, the data table or form of a product. Do not push those
   into the central system.
 
 > The principle: promote something into the shared layer only once it is genuinely

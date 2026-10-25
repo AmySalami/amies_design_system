@@ -1,7 +1,10 @@
 /* =========================================================
    Amie's Design System — Design Tokens
+   Version 1.0.0
    Single source of truth. Edit a value here and it updates
-   every project that loads this file.
+   every project that loads this file. Bump the version above
+   and tag the commit whenever this file changes, so a consumer
+   can tell which copy it vendored.
      <link rel="stylesheet" href="amies-design-system.css" />
    ========================================================= */
 :root{
