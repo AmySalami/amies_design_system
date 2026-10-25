@@ -18,6 +18,7 @@
   --secondary:#1e3258;   /* SECONDARY - headings, labels, text on primary */
   --accent-soft:#F2D9C6; /* soft accent tint */
   --sage:#7E8B6F;        /* tertiary accent (data viz) */
+  --sage-soft:#BCC1AF;   /* sage at surface strength, holds --secondary text at 6.9:1 */
   --highlight:rgba(255,196,0,.5); /* inline text highlight (mark) */
   --white:#fff;          /* pure white for card surfaces */
   --white-soft:rgba(255,255,255,.5); /* translucent white (tag bg) */
@@ -68,6 +69,7 @@
   --shadow-pill:0 8px 20px -14px rgba(42,38,34,.5);
   --shadow-lift:0 16px 32px -16px rgba(255,196,0,.85); /* derived from --accent */
   --shadow-panel:0 30px 60px -38px rgba(42,38,34,.4);
+  --shadow-note:0 14px 30px rgba(30,50,88,.16); /* post-it lift, derived from --secondary */
 
   /* ---- typography: fonts ---- */
   --font-display:"Fraunces",serif;
@@ -203,6 +205,23 @@ body h3{font-family:var(--font-display);font-weight:var(--weight-semibold);font-
 .pullquote blockquote{font-family:var(--font-display);font-style:italic;font-weight:var(--weight-regular);font-size:var(--text-quote);line-height:var(--leading-snug);letter-spacing:var(--tracking-snug);color:var(--ink);}
 .pullquote blockquote::before{content:"\201C";color:var(--accent);}
 .pullquote blockquote::after{content:"\201D";color:var(--accent);}
+
+/* ---- post-it ----
+   Square sticky note for a short editorial statement (a "How might we", a Goal).
+   Pair two in a .postit-row and give the second .postit-stagger so it drops
+   a quarter of its own height. Override --postit-size to resize one. */
+.postit{--postit-size:280px;flex:0 0 auto;width:var(--postit-size);aspect-ratio:1/1;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:var(--space-block);background:var(--highlight);border-radius:var(--r-sm);box-shadow:var(--shadow-note);transform:rotate(-1.5deg);}
+.postit .eyebrow{margin-bottom:10px;}
+.postit-body{margin:0;font-size:var(--text-body);line-height:var(--leading-relaxed);color:var(--secondary);}
+.postit-sage{background:var(--sage-soft);}
+.postit-tilt-right{transform:rotate(1.5deg);}
+.postit-stagger{margin-top:calc(var(--postit-size) * .25);}
+.postit-row{display:flex;justify-content:center;align-items:flex-start;gap:32px;}
+@media (max-width:767px){
+  .postit-row{flex-direction:column;align-items:center;}
+  .postit{aspect-ratio:auto;}
+  .postit-stagger{margin-top:0;}
+}
 
 /* ---- highlight ---- */
 mark{background:var(--highlight);color:var(--ink);padding:0 .15em;border-radius:var(--r-xs);}

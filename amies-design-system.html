@@ -162,6 +162,7 @@
         <div class="swatches">
           <div class="swatch"><div class="chip" style="background:var(--accent-soft);"></div><div class="meta"><div class="nm">Accent soft</div><div class="hex">#F2D9C6</div><div class="var">--accent-soft</div><div class="role">Soft tints and gentle fills.</div></div></div>
           <div class="swatch"><div class="chip" style="background:var(--sage);"></div><div class="meta"><div class="nm">Sage</div><div class="hex">#7E8B6F</div><div class="var">--sage</div><div class="role">Tertiary accent for data and secondary bars.</div></div></div>
+          <div class="swatch"><div class="chip" style="background:var(--sage-soft);"></div><div class="meta"><div class="nm">Sage soft</div><div class="hex">#BCC1AF</div><div class="var">--sage-soft</div><div class="role">Sage as a surface. Carries navy text, unlike full sage.</div></div></div>
           <div class="swatch"><div class="chip" style="background:var(--highlight);"></div><div class="meta"><div class="nm">Highlight</div><div class="hex">rgba(255,196,0,.5)</div><div class="var">--highlight</div><div class="role">Inline text highlight (the <mark>mark</mark> token).</div></div></div>
         </div>
       </div>
@@ -303,6 +304,7 @@
           <div class="shadow-card" style="box-shadow:var(--shadow-pill);">Floating pill</div>
           <div class="shadow-card" style="box-shadow:var(--shadow-lift);">Button lift</div>
           <div class="shadow-card" style="box-shadow:var(--shadow-panel);">Panel</div>
+          <div class="shadow-card" style="box-shadow:var(--shadow-note);">Post-it</div>
         </div>
       </div>
     </section>
@@ -435,6 +437,21 @@
         <div class="ds-stage col">
           <div class="pullquote"><blockquote>Why settle for a compromise when you can design the whole experience.</blockquote></div>
         </div>
+      </div>
+
+      <div class="ds-block">
+        <h3>Post-it</h3>
+        <div class="postit-row">
+          <div class="postit">
+            <p class="eyebrow">How might we</p>
+            <p class="postit-body">Bring scattered data into one clear view, so doctors can recommend vaccines without the worry of doubling up?</p>
+          </div>
+          <div class="postit postit-sage postit-tilt-right postit-stagger">
+            <p class="eyebrow">Goal</p>
+            <p class="postit-body">Doctors will read a patient's history as easily as a doctor who has known them for years.</p>
+          </div>
+        </div>
+        <div class="ds-note"><span class="mono">.postit</span>: 280px square, <span class="mono">--r-sm</span> corners, tilted 1.5deg left. Add <span class="mono">.postit-sage</span> for the sage surface, <span class="mono">.postit-tilt-right</span> to lean the other way, <span class="mono">.postit-stagger</span> to drop it a quarter of its own height. Wrap a pair in <span class="mono">.postit-row</span>, which stacks and drops both the square ratio and the stagger under 767px. Resize one note by setting <span class="mono">--postit-size</span> on it. The sage variant fills with <span class="mono">--sage-soft</span>, not <span class="mono">--sage</span>: navy on full sage reaches only 3.5:1, below the 4.5:1 needed at this text size.</div>
       </div>
 
       <div class="ds-block">
